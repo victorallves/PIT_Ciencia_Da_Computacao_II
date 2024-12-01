@@ -19,11 +19,22 @@
         <h2>Explore nossos deliciosos cupcakes</h2>
         <p>Encontre a variedade perfeita para o seu gosto e celebre momentos especiais com um toque doce!</p>
         
+        <div>
+            <p>Bem-vindo, <span th:text="${username}">Usuário</span>!</p>
+        </div>
+        
+        <div th:each="cupcake : ${cupcakes}" class="cupcake-item">
+            <h3 th:text="${cupcake.name}"></h3>
+            <img th:src="@{${cupcake.image}}" alt="Imagem do cupcake" />
+            <p th:text="${cupcake.description}"></p>
+            <p th:text="${cupcake.price}"></p>
+        </div>
+
         <nav>
-            <a href="/login" class="cta-button">Sair</a>
+            <a href="/logout" class="cta-button">Sair</a>
         </nav>
     </div>
-    
+
     <footer>
         <p>&copy; 2024 Cupcakes do Victor. Todos os direitos reservados.</p>
     </footer>
