@@ -38,7 +38,7 @@ public class UserController {
     @PostMapping("/cadastro")
     public String processCadastro(@ModelAttribute User user) {
         userRepository.save(user);
-        return "login";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -70,13 +70,6 @@ public class UserController {
         return "home";
     }
 
-    @GetMapping("/cart")
-    public String viewCart(HttpSession session, Model model) {
-        List<Map<String, String>> cart = getOrInitializeCart(session);
-        model.addAttribute("cart", cart);
-        return "cart";
-    }
-
     @PostMapping("/add-to-cart")
     public String addToCart(HttpSession session, String name, String price) {
         List<Map<String, String>> cart = getOrInitializeCart(session);
@@ -85,9 +78,56 @@ public class UserController {
         return "redirect:/home";
     }
 
+    @PostMapping("/remove-from-cart")
+    public String removeFromCart(HttpSession session, String name) {
+        List<Map<String, String>> cart = getOrInitializeCart(session);
+        cart.removeIf(item -> item.get("name").equals(name));
+        session.setAttribute("cart", cart);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/cart")
+    public String viewCart(HttpSession session, Model model) {
+        List<Map<String, String>> cart = getOrInitializeCart(session);
+        double total = cart.stream()
+                           .mapToDouble(item -> {
+                               try {
+                                   String price = item.get("price").replaceAll("[^\\d,]", "").replace(",", ".");
+                                   return Double.parseDouble(price);
+                               } catch (NumberFormatException e) {
+                                   return 0.0; 
+                               }
+                           })
+                           .sum();
+
+        model.addAttribute("cart", cart);
+        model.addAttribute("cartTotal", String.format("R$ %.2f", total)); 
+        return "cart";
+    }
+
+    
+    @GetMapping("/checkout")
+    public String checkout(HttpSession session, Model model) {
+        List<Map<String, String>> cart = getOrInitializeCart(session);
+        double total = cart.stream()
+                           .mapToDouble(item -> {
+                               try {
+                                   String price = item.get("price").replaceAll("[^\\d,]", "").replace(",", ".");
+                                   return Double.parseDouble(price);
+                               } catch (NumberFormatException e) {
+                                   return 0.0; 
+                               }
+                           })
+                           .sum();
+
+        model.addAttribute("cart", cart);
+        model.addAttribute("cartTotal", String.format("R$ %.2f", total));
+        model.addAttribute("message", "Compra realizada com sucesso!"); 
+        return "checkout"; 
+    }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.removeAttribute("cart");
         session.invalidate();
         return "redirect:/login";
     }
@@ -109,11 +149,13 @@ public class UserController {
         return List.of(
                 Map.of("name", "Chocolate", "description", "Delicioso cupcake de chocolate", "price", "R$ 5,00",
                         "image", "/images/chocolate.jpg"),
-                Map.of("name", "Baunilha", "description", "Cupcake clássico de baunilha", "price", "R$ 4,50", "image",
-                        "/images/baunilha.jpg"),
+                Map.of("name", "Baunilha", "description", "Cupcake clássico de baunilha", "price", "R$ 4,50",
+                        "image", "/images/baunilha.jpg"),
                 Map.of("name", "Red Velvet", "description", "Cupcake com sabor e cor únicos", "price", "R$ 6,00",
                         "image", "/images/red_velvet.jpg"),
-                Map.of("name", "Limão", "description", "Refrescante cupcake de limão", "price", "R$ 5,50", "image",
-                        "/images/limao.jpg"));
+                Map.of("name", "Limão", "description", "Refrescante cupcake de limão", "price", "R$ 5,50",
+                        "image", "/images/limao.jpg"));
     }
+    
+
 }

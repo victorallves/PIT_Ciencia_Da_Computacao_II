@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra Finalizada - Cupcakes do Victor</title>
+    <link rel="stylesheet" th:href="@{/checkout.css}">
+</head>
+<body>
+    <header>
+        <h1>Compra Finalizada</h1>
+    </header>
+    <div class="main-content">
+        <div class="thank-you">
+            <img th:src="@{/images/logo.png}" alt="Obrigado pela compra" class="thank-you-image">
+            <h2>Obrigado por comprar na Cupcakes do Victor!</h2>
+        </div>
+        
+        <p class="success-message" th:text="${message}">Compra realizada com sucesso!</p>
+
+        <div class="order-details">
+            <h3>Detalhes do Pedido</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cart}">
+                        <td th:text="${item.name}">Nome do Produto</td>
+                        <td th:text="${item.price}">Preço</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Total: <span th:text="${cartTotal}">R$ 0,00</span></h4>
+        </div>
+
+        <a href="/home" class="cta-button">Voltar para a página inicial</a>
+    </div>
+    <footer class="footer">
+        &copy; 2024 Cupcakes do Victor. Todos os direitos reservados.
+    </footer>
+</body>
+</html>

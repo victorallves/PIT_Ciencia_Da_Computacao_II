@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carrinho - Cupcakes do Victor</title>
-<link rel="stylesheet" th:href="@{/cart.css}" />
+    <title>Carrinho</title>
+    <link rel="stylesheet" th:href="@{/cart.css}">
 </head>
 <body>
-	<header>
-		<div class="header-content">
-			<h1>Carrinho de Compras</h1>
-		</div>
-		<nav>
-			<div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-				☰
-			</div>
-			<ul class="nav-links">
-				<li><a href="/home" class="cta-button">Voltar para a Home</a></li>
-				<li><a href="/checkout" class="cta-button">Finalizar Compra</a></li>
-			</ul>
-		</nav>
-	</header>
+    <header>
+        <div class="header-content">
+            <h1>Carrinho de Compras</h1>
+        </div>
+    </header>
 
-	<div class="main-content">
-		<h2>Itens no Carrinho</h2>
-		<div th:each="item : ${cart}" class="cupcake-item">
-			<h3 th:text="${item.name}"></h3>
-			<p th:text="${item.price}"></p>
-		</div>
-	</div>
+    <div class="main-content">
+        <div th:if="${cart.isEmpty()}">
+            <p>O carrinho está vazio.</p>
+            <a href="/home" class="continue-shopping">Continuar Comprando</a>
+        </div>
 
-	<footer>
-		<p>&copy; 2024 Cupcakes do Victor. Todos os direitos reservados.</p>
-	</footer>
+        <div th:if="${!cart.isEmpty()}">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${cart}">
+                        <td th:text="${item.name}">Nome do Produto</td>
+                        <td th:text="${item.price}">Preço</td>
+                        <td>
+                            <form action="/remove-from-cart" method="post">
+                                <input type="hidden" th:value="${item.name}" name="name">
+                                <button type="submit" class="remove-btn">Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-	<script>
-		function toggleMenu() {
-			const navLinks = document.querySelector('.nav-links');
-			navLinks.classList.toggle('active');
-		}
-	</script>
+            <div class="cart-summary">
+                <h3>Total: <span th:text="${cartTotal}">R$ 0,00</span></h3>
+                <div class="actions">
+                    <a href="/home" class="continue-shopping">Continuar Comprando</a>
+                    <a href="/checkout" class="checkout">Finalizar Compra</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cupcakes do Victor. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
