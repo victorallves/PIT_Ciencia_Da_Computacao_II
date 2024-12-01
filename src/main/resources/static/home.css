@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+/* Corpo da página */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, #ff7f50, #ffab72); /* Gradiente de cor */
+    color: white;
+}
+
+/* Estilo do cabeçalho */
+header {
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 50px 20px;
+    border-bottom: 3px solid #ff7f50;
+}
+
+header .header-content h1 {
+    font-size: 48px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+header .header-content p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Conteúdo principal */
+.main-content {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.main-content h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.main-content p {
+    font-size: 20px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Navegação com botões */
+nav a.cta-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ff7f50;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+}
+
+nav a.cta-button:hover {
+    background-color: #e76b3c;
+    transform: translateY(-3px);
+}
+
+/* Estilo do rodapé */
+footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 14px;
+}
