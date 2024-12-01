@@ -1,153 +1,197 @@
 /* Estilo base para a página */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f4;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: #f4f4f4;
+	color: #333;
+	line-height: 1.6;
 }
 
 header {
-    background-color: #ff5733; /* Cor de fundo laranja */
-    color: white;
-    padding: 20px;
-    text-align: center;
+	background-color: #ff5733;
+	color: white;
+	padding: 20px;
+	text-align: center;
 }
 
 .header-content h1 {
-    margin: 0;
-    font-size: 2rem;
+	margin: 0;
+	font-size: 2.5rem;
+	font-weight: bold;
 }
 
 .header-content p {
-    margin: 5px 0;
-    font-size: 1.2rem;
+	margin: 5px 0;
+	font-size: 1.2rem;
 }
 
 .main-content {
-    padding: 20px;
-    text-align: center;
+	padding: 20px;
+	text-align: center;
 }
 
 .main-content h2 {
-    font-size: 1.5rem;
-    color: #333;
+	font-size: 1.75rem;
+	color: #333;
 }
 
 .main-content p {
-    font-size: 1.2rem;
-    margin: 15px 0;
+	font-size: 1.2rem;
+	margin: 15px 0;
 }
 
 .cupcake-item {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: white;
+	padding: 15px;
+	margin-bottom: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .cupcake-item img {
-    width: 100%;
-    max-width: 200px; /* Tamanho máximo da imagem */
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
+	width: 100%;
+	max-width: 180px;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+	border-radius: 8px;
 }
 
 .cupcake-item h3 {
-    font-size: 1.3rem;
-    color: #333;
-    margin: 10px 0;
+	font-size: 1.4rem;
+	color: #333;
+	margin: 10px 0;
 }
 
 .cupcake-item p {
-    font-size: 1rem;
-    color: #777;
+	font-size: 1rem;
+	color: #777;
 }
 
+/* Navbar responsiva */
 nav {
-    margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 20px;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+}
+
+nav li {
+	margin-left: 20px;
+}
+
+.hamburger {
+	display: none;
+	cursor: pointer;
+}
+
+@media ( max-width : 768px) {
+	.hamburger {
+		display: block;
+	}
+	nav ul {
+		display: none;
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+	nav.active ul {
+		display: flex;
+	}
+	nav li {
+		margin-left: 0;
+		margin-top: 10px;
+	}
 }
 
 /* Estilo do botão "Sair" */
 .cta-button {
-    display: inline-block;
-    background-color: #ff5733;
-    color: white;
-    padding: 12px 25px;
-    font-size: 18px;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+	display: inline-block;
+	background-color: #ff5733;
+	color: white;
+	padding: 12px 25px;
+	font-size: 18px;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: all 0.3s ease;
+	text-align: center;
+	border: none;
 }
 
 .cta-button:hover {
-    background-color: #e04d29; /* Cor do botão quando passar o mouse */
+	background-color: #e04d29;
+	transform: scale(1.05);
+}
+
+.cta-button:focus {
+	outline: 3px solid #ff5733;
 }
 
 /* Estilos para o rodapé */
 footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
+	background-color: #333;
+	color: white;
+	text-align: center;
+	padding: 20px;
+	margin-top: 50px;
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
 }
 
 footer p {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
-/* Responsividade para tablets e dispositivos com tela menor que 768px */
-@media (max-width: 768px) {
-    .main-content {
-        padding: 15px;
-    }
+/* Rodapé fixo em dispositivos móveis */
+@media ( max-width : 480px) {
+	footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		box-sizing: border-box;
+	}
+	.cta-button {
+		font-size: 16px;
+	}
+	.main-content {
+		padding: 10px;
+	}
+	.header-content h1 {
+		font-size: 1.5rem;
+	}
+	.cupcake-item h3 {
+		font-size: 1.1rem;
+	}
+	.cupcake-item {
+		text-align: center;
+		padding: 10px;
+	}
+	.cupcake-item img {
+		width: 80%;
+	}
 
-    .cupcake-item {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    .cta-button {
-        padding: 12px 25px;
-        font-size: 16px;
-    }
-}
-
-/* Responsividade para telas pequenas (celulares) */
-@media (max-width: 480px) {
-    header {
-        padding: 10px;
-    }
-
-    .header-content h1 {
-        font-size: 1.5rem;
-    }
-
-    .main-content h2 {
-        font-size: 1.2rem;
-    }
-
-    .cta-button {
-        width: 100%;
-        padding: 14px;
-        font-size: 18px;
-    }
-
-    .cupcake-item {
-        text-align: center;
-        padding: 10px;
-    }
-
-    .cupcake-item img {
-        width: 80%; /* Ajuste a imagem para caber bem na tela */
-    }
-
-    footer {
-        padding: 10px;
-    }
+	/* Responsividade para tablets e dispositivos com tela menor que 768px */
+	@media ( max-width : 768px) {
+		.main-content {
+			padding: 15px;
+		}
+		.cupcake-item {
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		.cta-button {
+			padding: 12px 25px;
+			font-size: 16px;
+		}
+	}
 }

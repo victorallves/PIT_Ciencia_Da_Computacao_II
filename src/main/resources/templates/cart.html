@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho - Cupcakes do Victor</title>
+<link rel="stylesheet" th:href="@{/cart.css}" />
+</head>
+<body>
+	<header>
+		<div class="header-content">
+			<h1>Carrinho de Compras</h1>
+		</div>
+		<nav>
+			<div class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+				☰
+			</div>
+			<ul class="nav-links">
+				<li><a href="/home" class="cta-button">Voltar para a Home</a></li>
+				<li><a href="/checkout" class="cta-button">Finalizar Compra</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div class="main-content">
+		<h2>Itens no Carrinho</h2>
+		<div th:each="item : ${cart}" class="cupcake-item">
+			<h3 th:text="${item.name}"></h3>
+			<p th:text="${item.price}"></p>
+		</div>
+	</div>
+
+	<footer>
+		<p>&copy; 2024 Cupcakes do Victor. Todos os direitos reservados.</p>
+	</footer>
+
+	<script>
+		function toggleMenu() {
+			const navLinks = document.querySelector('.nav-links');
+			navLinks.classList.toggle('active');
+		}
+	</script>
+</body>
+</html>

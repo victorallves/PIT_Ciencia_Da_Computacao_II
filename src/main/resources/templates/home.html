@@ -1,43 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial - Cupcakes do Victor</title>
-    <link rel="stylesheet" th:href="@{/home.css}" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página Inicial - Cupcakes do Victor</title>
+<link rel="stylesheet" th:href="@{/home.css}" />
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <h1>Bem-vindo ao Cupcakes do Victor!</h1>
-            <p>Descubra os melhores cupcakes da cidade, fresquinhos e deliciosos!</p>
-        </div>
-    </header>
+	<header>
+		<div class="header-content">
+			<h1>Bem-vindo ao Cupcakes do Victor!</h1>
+			<p>Descubra os melhores cupcakes da cidade, fresquinhos e
+				deliciosos!</p>
+		</div>
+		<nav>
+			<div class="logo">
+				<img th:src="@{/images/logo.png}" alt="Logo Cupcakes do Victor"
+					width="75" />
+			</div>
+			<ul>
+				<li><a href="/login" class="cta-button">Sair</a></li>
+				<li><a href="/cart" class="cta-button">Ver Carrinho</a></li>
+			</ul>
+			<div class="hamburger" onclick="toggleMenu()">☰</div>
+		</nav>
+	</header>
 
-    <div class="main-content">
-        <h2>Explore nossos deliciosos cupcakes</h2>
-        <p>Encontre a variedade perfeita para o seu gosto e celebre momentos especiais com um toque doce!</p>
-        
-        <div>
-            <p>Bem-vindo, <span th:text="${username}">Usuário</span>!</p>
-        </div>
-        
-        <div th:each="cupcake : ${cupcakes}" class="cupcake-item">
-            <h3 th:text="${cupcake.name}"></h3>
-            <img th:src="@{${cupcake.image}}" alt="Imagem do cupcake" />
-            <p th:text="${cupcake.description}"></p>
-            <p th:text="${cupcake.price}"></p>
-        </div>
+	<div class="main-content">
+		<h2>Explore nossos deliciosos cupcakes</h2>
+		<p>Encontre a variedade perfeita para o seu gosto e celebre
+			momentos especiais com um toque doce!</p>
 
-        <nav>
-            <a href="/logout" class="cta-button">Sair</a>
-        </nav>
-    </div>
+		<div>
+			<p>
+				Bem-vindo, <span th:text="${username}">Usuário</span>!
+			</p>
+		</div>
 
-    <footer>
-        <p>&copy; 2024 Cupcakes do Victor. Todos os direitos reservados.</p>
-    </footer>
+		<div th:each="cupcake : ${cupcakes}" class="cupcake-item">
+			<h3 th:text="${cupcake.name}"></h3>
+			<img th:src="@{${cupcake.image}}" alt="Imagem do cupcake" width="200" />
+			<p th:text="${cupcake.description}"></p>
+			<p th:text="${cupcake.price}"></p>
+
+			<form th:action="@{/add-to-cart}" method="post">
+				<input type="hidden" th:name="name" th:value="${cupcake.name}" /> <input
+					type="hidden" th:name="price" th:value="${cupcake.price}" />
+				<button type="submit" class="cta-button">Adicionar ao
+					Carrinho</button>
+			</form>
+		</div>
+
+	</div>
+
+	<footer>
+		<p>&copy; 2024 Cupcakes do Victor. Todos os direitos reservados.</p>
+	</footer>
+
+	<script>
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+    </script>
 
 </body>
 </html>
