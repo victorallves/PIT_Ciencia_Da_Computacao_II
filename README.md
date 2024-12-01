@@ -5,6 +5,16 @@ Este repositório contém a continuação do **Projeto Integrador Transdisciplin
 - **Backlog do Produto**
 - **Mockups e Wireframes** para uma loja de cupcakes.
 
+## Tecnologias Utilizadas
+
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
+
+| Tecnologia       | Descrição                                                                                       |
+|------------------|-------------------------------------------------------------------------------------------------|
+| ![Thymeleaf](https://img.shields.io/badge/-Thymeleaf-005F0F?logo=Thymeleaf&logoColor=white&style=for-the-badge) | Motor de templates para construção de interfaces web dinâmicas. |
+| ![Spring Tools Suite 4](https://img.shields.io/badge/-STS4-6DB33F?logo=Spring&logoColor=white&style=for-the-badge) | Ambiente de desenvolvimento baseado em Eclipse, otimizado para projetos Spring. |
+| ![H2 Database](https://img.shields.io/badge/-H2%20Database-003B57?logo=Databricks&logoColor=white&style=for-the-badge) | Banco de dados relacional em memória utilizado para testes e desenvolvimento. |
+
 ## Recursos
 
 ### Diagrama de Caso de Uso UML
